@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=impe
-Date                   :=28/07/16
+Date                   :=30/07/16
 CodeLitePath           :="/home/impe/.codelite"
 LinkerName             :=/usr/bin/x86_64-linux-gnu-g++
 SharedObjectLinkerName :=/usr/bin/x86_64-linux-gnu-g++ -shared -fPIC
@@ -35,7 +35,7 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="Serial.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
-LinkOptions            :=  
+LinkOptions            :=  -lpthread
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
@@ -60,7 +60,7 @@ AS       := /usr/bin/x86_64-linux-gnu-as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Serial.cpp$(ObjectSuffix) $(IntermediateDirectory)/RingBuffer.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Serial.cpp$(ObjectSuffix) $(IntermediateDirectory)/RingBuffer.cpp$(ObjectSuffix) $(IntermediateDirectory)/PingPong.cpp$(ObjectSuffix) 
 
 
 
@@ -114,6 +114,14 @@ $(IntermediateDirectory)/RingBuffer.cpp$(DependSuffix): RingBuffer.cpp
 
 $(IntermediateDirectory)/RingBuffer.cpp$(PreprocessSuffix): RingBuffer.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/RingBuffer.cpp$(PreprocessSuffix) "RingBuffer.cpp"
+
+$(IntermediateDirectory)/PingPong.cpp$(ObjectSuffix): PingPong.cpp $(IntermediateDirectory)/PingPong.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/impe/Arduino/dev/serial/Serial/PingPong.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PingPong.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/PingPong.cpp$(DependSuffix): PingPong.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/PingPong.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/PingPong.cpp$(DependSuffix) -MM "PingPong.cpp"
+
+$(IntermediateDirectory)/PingPong.cpp$(PreprocessSuffix): PingPong.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PingPong.cpp$(PreprocessSuffix) "PingPong.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

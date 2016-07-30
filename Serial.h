@@ -1,8 +1,8 @@
 #ifndef SERIAL_H
 #define SERIAL_H
-#include "stdint.h"
-#include "stdlib.h"
-#include <stdio.h>
+#include <cstdint>
+#include <cstdlib>
+#include <cstdio>
 
 //#include "SerialException.h"
 
@@ -13,7 +13,6 @@ private:
 	char* port;
 	size_t baud;
 	bool status;
-	int fd;
 	int parity;
 	int should_block;
 	FILE* f;
@@ -24,8 +23,8 @@ public:
 	
 public:
     void end();
-    size_t read_(uint8_t* buf, size_t len);
-	size_t write_(uint8_t* str); 
+    std::size_t read(void* buffer, std::size_t size, std::size_t count);
+	std::size_t write(const void* buffer, std::size_t size, std::size_t count); 
 };
 
 #endif // SERIAL_H
